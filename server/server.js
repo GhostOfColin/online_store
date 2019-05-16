@@ -1,3 +1,4 @@
+const schema = require("./schema/schema");
 const express = require("express");
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
@@ -16,5 +17,15 @@ mongoose
 
 // remember we use bodyParser to parse requests into json
 app.use(bodyParser.json());
+
+const expressGraphQL = require("express-graphql");
+
+app.use(
+  "/graphql",
+  expressGraphQL({
+    schema,
+    graphiql: true
+  })
+);
 
 module.exports = app;
